@@ -18,19 +18,10 @@ class HealthCheck(APIView):
     def get(self, request):
         return Response({"message": "The API is running"})
     
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
 
-class RegisterView(APIView):
-    permission_classes = []  # Anyone can register
-
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response(
-                {"message": "User registered successfully", "user": {"username": user.username, "email": user.email}},
-                status=status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginAPIView(APIView):
     permission_classes = [permissions.AllowAny]
