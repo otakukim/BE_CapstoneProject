@@ -17,7 +17,7 @@ class HealthCheck(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
-        return Response({"message": "The API is running"})
+        return Response({"message": "The NUST VENUE BOOKING API is running"})
     
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
